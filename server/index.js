@@ -14,8 +14,8 @@ const PORT = process.env.PORT || 3001
 
 // Database connection with better error handling
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || "postgresql://postgres:postgres@localhost:5432/finance_tracker",
-  ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
+  connectionString: process.env.DATABASE_URL || "postgresql://postgres:postgres@localhost:5432/finance_tracker?sslmode=disable",
+  ssl: false,//process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
   max: 20,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 2000,
@@ -63,7 +63,7 @@ app.use(
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:3000",
+    origin: "*",//process.env.FRONTEND_URL || "http://localhost:3002",
     credentials: true,
   }),
 )
